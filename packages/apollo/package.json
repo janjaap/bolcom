@@ -1,9 +1,8 @@
 {
   "name": "apollo",
   "version": "1.0.0",
-  "description": "",
   "scripts": {
-    "dev": "node ./index.mjs",
+    "start": "node ./index.mjs",
     "test": "jest",
     "test:watch": "jest --watch"
   },
