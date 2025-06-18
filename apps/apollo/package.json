@@ -2,10 +2,11 @@
   "name": "apollo",
   "version": "1.0.0",
   "scripts": {
-    "start": "node ./index.mjs",
+    "start": "node ./index.js",
     "test": "jest",
     "test:watch": "jest --watch"
   },
+  "main": "index.js",
   "dependencies": {
     "@apollo/server": "^4.12.2",
     "graphql": "^16.11.0"

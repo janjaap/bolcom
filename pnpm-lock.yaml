@@ -8,6 +8,19 @@ importers:
 
   .: {}
 
+  apps/apollo:
+    dependencies:
+      '@apollo/server':
+        specifier: ^4.12.2
+        version: 4.12.2(graphql@16.11.0)
+      graphql:
+        specifier: ^16.11.0
+        version: 16.11.0
+    devDependencies:
+      '@types/node':
+        specifier: ^24.0.3
+        version: 24.0.3
+
   apps/web:
     dependencies:
       '@astrojs/react':
@@ -28,19 +41,6 @@ importers:
       react-dom:
         specifier: ^19.1.0
         version: 19.1.0(react@19.1.0)
-
-  packages/apollo:
-    dependencies:
-      '@apollo/server':
-        specifier: ^4.12.2
-        version: 4.12.2(graphql@16.11.0)
-      graphql:
-        specifier: ^16.11.0
-        version: 16.11.0
-    devDependencies:
-      '@types/node':
-        specifier: ^24.0.3
-        version: 24.0.3
 
 packages:
 

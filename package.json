@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "description": "BOL.com multi-select code assessment",
   "scripts": {
-    "dev": "pnpm --filter web astro dev",
-    "dev:apollo": "pnpm --filter apollo run dev",
+    "dev": "pnpm -r dev",
     "build": "pnpm --filter web astro build",
     "preview": "pnpm --filter web astro preview",
     "astro": "pnpm --filter web astro"
