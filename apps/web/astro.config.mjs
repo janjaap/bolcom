@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig, envField } from 'astro/config';
 
 import react from '@astrojs/react';
 
@@ -9,4 +9,12 @@ export default defineConfig({
   integrations: [react()],
   scopedStyleStrategy: 'class',
   server: { port: 3000 },
+  env: {
+    schema: {
+      GRAPHQL_HOST: envField.string({
+        context: 'client',
+        access: 'public',
+      }),
+    },
+  },
 });

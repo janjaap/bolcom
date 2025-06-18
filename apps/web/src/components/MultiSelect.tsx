@@ -1,13 +1,34 @@
-// const options = await fetch('');
+import { GRAPHQL_HOST } from 'astro:env/client';
+
+const response = await fetch(GRAPHQL_HOST, {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    query: `
+      query Items {
+        items
+      }
+    `,
+  }),
+});
+
+const json = await response.json();
+const { items } = json.data;
+
+// query FilterItems($value: String!) {
+//   filter(value: $value)
+// }
 
 export const MultiSelect = () => {
   return (
     <div>
       <h2>Select Multiple Options</h2>
       <select multiple>
-        <option value="option1">Option 1</option>
-        <option value="option2">Option 2</option>
-        <option value="option3">Option 3</option>
+        {items.map((item: string) => (
+          <option key={item} value={item}>
+            {item}
+          </option>
+        ))}
       </select>
     </div>
   );
