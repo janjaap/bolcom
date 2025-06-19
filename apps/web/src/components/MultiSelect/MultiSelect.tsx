@@ -1,4 +1,4 @@
-import { useEffect, useState, type ChangeEvent } from 'react';
+import { useEffect, useRef, useState, type ChangeEvent } from 'react';
 import { Item } from '../Item/Item';
 import Styles from './MultiSelect.module.css';
 
@@ -11,17 +11,17 @@ const MultiSelect = ({ items }: MultiSelectProps) => {
   const [selectedItems, setSelectedItems] = useState<Array<string>>([]);
   const [unselectedItems, setUnselectedItems] = useState<Array<string>>(items);
   const [searchValue, setSearchValue] = useState<string>('');
+  const itemsContainer = useRef<HTMLUListElement>(null);
 
   const onSearch = (event: ChangeEvent<HTMLInputElement>) => {
-    const searchValue = event.target.value.toLowerCase().trim();
-
-    if (!searchValue) {
-      return;
-    }
-
-    const itemsMatching = items.filter((item) => item.toLowerCase().includes(searchValue));
+    const searchValue = event.target.value.trim();
 
     setSearchValue(searchValue);
+
+    if (!searchValue) return;
+
+    const itemsMatching = items.filter((item) => item.toLocaleLowerCase().includes(searchValue.toLocaleLowerCase()));
+
     setUnselectedItems(itemsMatching);
   };
 
@@ -34,7 +34,10 @@ const MultiSelect = ({ items }: MultiSelectProps) => {
 
     setSelectedItems((prev) => [...prev, ...preferredItems].sort((a, b) => a.localeCompare(b)));
     setPreferredItems([]);
-    return false;
+
+    if (itemsContainer.current) {
+      itemsContainer.current.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   };
 
   const onSelectItem = (event: ChangeEvent<HTMLInputElement>) => {
@@ -72,7 +75,7 @@ const MultiSelect = ({ items }: MultiSelectProps) => {
             value={searchValue}
           />
 
-          <ul className={Styles.multiSelect__list}>
+          <ul className={Styles.multiSelect__list} ref={itemsContainer}>
             {selectedItems.map((item: string) => (
               <li key={item} value={item} className={Styles.multiSelect__listItem}>
                 <Item item={item} onSelectItem={onDeselectItem} selected />
