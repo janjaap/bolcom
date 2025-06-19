@@ -1,0 +1,20 @@
+---
+import { GRAPHQL_HOST } from 'astro:env/client';
+import ReactMultiSelect from '../components/MultiSelect/MultiSelect';
+
+const json = await fetch(GRAPHQL_HOST, {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    query: `
+      query Items {
+        items
+      }
+    `,
+  }),
+}).then((res) => res.json());
+
+const { items }: { items: Array<string> } = json.data;
+---
+
+<ReactMultiSelect items={items} client:load />
