@@ -1,0 +1,18 @@
+.item__label {
+  --foreground: inherit;
+  color: var(--foreground);
+  flex: 1;
+}
+
+.item__label:hover {
+  --foreground: rebeccapurple;
+}
+
+.item__label::after {
+  content: '';
+  cursor: pointer;
+  height: 100%;
+  inset: 0;
+  position: absolute;
+  width: 100%;
+}
