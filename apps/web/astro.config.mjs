@@ -14,7 +14,6 @@ export default defineConfig({
       GRAPHQL_HOST: envField.string({
         context: 'client',
         access: 'public',
-        default: 'http://localhost:4000',
       }),
     },
   },
