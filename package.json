@@ -6,7 +6,8 @@
     "dev": "pnpm -r dev",
     "build": "pnpm --filter web astro build",
     "preview": "pnpm --filter web astro preview",
-    "astro": "pnpm --filter web astro"
+    "astro": "pnpm --filter web astro",
+    "test": "pnpm -r test"
   },
   "dependencies": {}
 }

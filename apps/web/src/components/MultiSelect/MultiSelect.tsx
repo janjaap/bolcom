@@ -111,7 +111,7 @@ const MultiSelect = ({ items }: MultiSelectProps) => {
   }, [items]);
 
   return (
-    <search>
+    <div role="search">
       <form className={Styles.multiSelect__form} onSubmit={onSubmit}>
         <input
           className={Styles.multiSelect__input}
@@ -147,7 +147,7 @@ const MultiSelect = ({ items }: MultiSelectProps) => {
 
         <input className={Styles.multiSelect__submit} type="submit" value="Apply" />
       </form>
-    </search>
+    </div>
   );
 };
 
