@@ -9,7 +9,7 @@ Code has been deployed to Vercel on:
 
 ## Installing
 
-Requirements:
+### Requirements
 
 - pnpm latest
 - Node 22
@@ -46,19 +46,19 @@ Requirements:
   }
   ```
 
-Install dependencies:
+### Install dependencies
 
 ```console
 $ pnpm i
 ```
 
-Run the dev server:
+### Run the dev server
 
 ```console
 $ pnpm dev
 ```
 
-Run production env:
+### Run production env
 
 ```console
 $ pnpm build && pnpm preview
