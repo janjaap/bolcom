@@ -1,18 +1,50 @@
+.item__input {
+  all: unset;
+  display: grid;
+  place-content: center;
+  border: 0.1rem solid var(--color-border);
+  background-color: white;
+  padding: 0.2rem;
+}
+
+.item__input:focus-visible + label::after {
+  outline: 0.1rem solid var(--color-focus);
+  outline-offset: -0.1rem;
+}
+
+.item__input::before {
+  display: flex;
+  content: '';
+  width: 0.8rem;
+  height: 0.8rem;
+  transform: scale(0);
+  transition: 100ms transform ease-in-out;
+  box-shadow: inset 1rem 1rem var(--color-accent);
+}
+
+.item__input:checked::before {
+  transform: scale(1);
+}
+
 .item__label {
-  --foreground: inherit;
+  --foreground: var(--color-text);
   color: var(--foreground);
   flex: 1;
 }
 
 .item__label:hover {
-  --foreground: rebeccapurple;
+  --foreground: var(--color-accent);
+  text-decoration: underline;
 }
 
 .item__label::after {
   content: '';
   cursor: pointer;
-  height: 100%;
   inset: 0;
   position: absolute;
-  width: 100%;
+}
+
+.item__label:focus-visible::after {
+  outline: 0.1rem solid var(--color-focus);
+  outline-offset: 0.1rem;
 }

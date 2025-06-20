@@ -8,8 +8,15 @@ interface Props {
 
 export const Item = ({ item, onSelectItem, selected = false }: Props) => (
   <>
-    <input type="checkbox" id={`item_check_${item}`} value={item} onChange={onSelectItem} checked={selected} />
-    <label className={Styles.select__listItemLabel} htmlFor={`item_check_${item}`}>
+    <input
+      checked={selected}
+      className={Styles.item__input}
+      id={`item_check_${item}`}
+      onChange={onSelectItem}
+      type="checkbox"
+      value={item}
+    />
+    <label className={Styles.item__label} htmlFor={`item_check_${item}`}>
       {item}
     </label>
   </>
