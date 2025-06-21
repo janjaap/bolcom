@@ -6,10 +6,7 @@ const itemsInDb = itemsJson.data.sort((a, b) => a.localeCompare(b));
 
 const resolvers = {
   Query: {
-    items: () => {
-      console.log({ itemsInDb });
-      return itemsInDb;
-    },
+    items: () => itemsInDb,
     filter: (_parent, args) => itemsInDb.filter((item) => new RegExp(args.value, 'i').test(item)),
   },
 };
