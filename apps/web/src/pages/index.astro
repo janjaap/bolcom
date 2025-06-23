@@ -4,11 +4,9 @@ export const prerender = false;
 import background from '../assets/background.svg';
 import MultiSelect from '../components/MultiSelect/MultiSelect.astro';
 import Layout from '../layouts/Layout.astro';
+import { STORAGE_KEY } from '../lib/storage';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
-
-const selectedItems = Astro.cookies.get('selectedItems')?.json() || [];
+const selectedItems = Astro.cookies.get(STORAGE_KEY)?.json() || [];
 ---
 
 <Layout>

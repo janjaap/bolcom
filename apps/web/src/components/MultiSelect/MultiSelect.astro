@@ -22,18 +22,7 @@ const itemsFromStorage = Astro.props.itemsFromStorage;
   <form class="multiSelect__form">
     <input class="multiSelect__input" placeholder="Search..." type="search" value="" />
 
-    <ul class="multiSelect__list">
-      {
-        items
-          .sort((a, b) => a.localeCompare(b))
-          .map((item) => (
-            <li class="multiSelect__listItem">
-              <input type="checkbox" id={item} name={item} value={item} />
-              <label for={item}>{item}</label>
-            </li>
-          ))
-      }
-    </ul>
+    <ul class="multiSelect__list"></ul>
 
     <input class="multiSelect__submit" type="submit" value="Apply" />
   </form>

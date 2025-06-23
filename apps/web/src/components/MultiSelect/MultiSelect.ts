@@ -1,5 +1,7 @@
 import { GRAPHQL_HOST } from 'astro:env/client';
-import { setCookie } from '../../lib/setCookie';
+import { getStorageProvider, STORAGE_KEY } from '../../lib/storage';
+
+const storageProvider = getStorageProvider();
 
 const itemsFromStorage = new Set<string>(
   JSON.parse(document.querySelector('[role="search"]')!.getAttribute('data-items-from-storage') || '[]'),
@@ -84,8 +86,6 @@ function preselectItem(event: Event) {
   } else {
     preselectedItems.delete(target);
   }
-
-  console.log({ preselectedItems });
 }
 
 function deselectItem(event: Event) {
@@ -96,7 +96,7 @@ function deselectItem(event: Event) {
   selectedItems.delete(target.value);
   unselectedItems.add(target.value);
 
-  setCookie('selectedItems', JSON.stringify(getSorted(selectedItems)), 30);
+  storageProvider.setItem(STORAGE_KEY, JSON.stringify(getSorted(selectedItems)));
 
   renderList();
 }
@@ -155,7 +155,7 @@ form.addEventListener('submit', (event) => {
       unselectedItems.delete(item.value);
     });
 
-  setCookie('selectedItems', JSON.stringify(getSorted(selectedItems)), 30);
+  storageProvider.setItem(STORAGE_KEY, JSON.stringify(getSorted(selectedItems)));
 
   filteredItems.clear();
   input.value = '';

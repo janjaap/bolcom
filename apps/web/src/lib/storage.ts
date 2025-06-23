@@ -1,7 +1,7 @@
 import { getCookie } from './getCookie';
 import { setCookie } from './setCookie';
 
-const STORAGE_KEY = 'preferences';
+export const STORAGE_KEY = 'selectedItems';
 const STORAGE_PERIOD_IN_DAYS = 30;
 
 interface BaseProvider {
