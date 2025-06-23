@@ -1,4 +1,9 @@
 import { GRAPHQL_HOST } from 'astro:env/client';
+import { setCookie } from '../../lib/setCookie';
+
+const itemsFromStorage = new Set<string>(
+  JSON.parse(document.querySelector('[role="search"]')!.getAttribute('data-items-from-storage') || '[]'),
+);
 
 const itemsFromSource = new Set<string>(
   JSON.parse(document.querySelector('[role="search"]')!.getAttribute('data-items') || ''),
@@ -9,8 +14,8 @@ const input = form.querySelector('.multiSelect__input') as HTMLInputElement;
 const list = form.querySelector('.multiSelect__list') as HTMLUListElement;
 
 const preselectedItems = new Set<HTMLInputElement>();
-const unselectedItems = new Set(itemsFromSource);
-const selectedItems = new Set<string>([]);
+const selectedItems = new Set<string>(itemsFromStorage);
+const unselectedItems = new Set(itemsFromSource.difference(itemsFromStorage));
 const filteredItems = new Set<string>([]);
 
 const getSorted = <T extends string>(set: Set<T>): T[] =>
@@ -71,16 +76,6 @@ function renderList() {
   list.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-function initList() {
-  list.childNodes.forEach((node) => {
-    if (node.nodeType === Node.ELEMENT_NODE) {
-      const checkbox = (node as HTMLElement).querySelector('input[type="checkbox"]') as HTMLInputElement;
-
-      checkbox.addEventListener('change', preselectItem);
-    }
-  });
-}
-
 function preselectItem(event: Event) {
   const target = event.currentTarget as HTMLInputElement;
 
@@ -100,6 +95,8 @@ function deselectItem(event: Event) {
 
   selectedItems.delete(target.value);
   unselectedItems.add(target.value);
+
+  setCookie('selectedItems', JSON.stringify(getSorted(selectedItems)), 30);
 
   renderList();
 }
@@ -158,10 +155,12 @@ form.addEventListener('submit', (event) => {
       unselectedItems.delete(item.value);
     });
 
+  setCookie('selectedItems', JSON.stringify(getSorted(selectedItems)), 30);
+
   filteredItems.clear();
   input.value = '';
 
   renderList();
 });
 
-initList();
+renderList();

@@ -15,9 +15,10 @@ const json = await fetch(GRAPHQL_HOST, {
 }).then((res) => res.json());
 
 const { items }: { items: Array<string> } = json.data;
+const itemsFromStorage = Astro.props.itemsFromStorage;
 ---
 
-<div role="search" data-items={JSON.stringify(items)}>
+<div role="search" data-items-from-storage={JSON.stringify(itemsFromStorage)} data-items={JSON.stringify(items)}>
   <form class="multiSelect__form">
     <input class="multiSelect__input" placeholder="Search..." type="search" value="" />
 
