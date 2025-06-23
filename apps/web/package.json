@@ -9,6 +9,7 @@
     "test": "vitest"
   },
   "dependencies": {
+    "@astrojs/vercel": "^8.2.0",
     "astro": "^5.9.4",
     "lodash": "^4.17.21",
     "react": "^19.1.0",
