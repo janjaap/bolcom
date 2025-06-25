@@ -95,6 +95,7 @@ const MultiSelect = ({ items }: MultiSelectProps) => {
 
     if (!itemsFromStorage) {
       setUnselectedItems(items);
+      setLoading(false);
     } else {
       try {
         const parsedPreferences = JSON.parse(itemsFromStorage) as Array<string>;
